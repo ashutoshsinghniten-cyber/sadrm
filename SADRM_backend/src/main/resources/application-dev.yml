@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/sadrmp?currentSchema=public&stringtype=unspecified}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:root}
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+# Local MinIO — jab app IntelliJ/terminal se run karo (Docker ke bahar)
+# MinIO Docker mein chalta hai: docker-compose up minio
+# App seedha localhost:9000 pe connect karti hai
+app:
+  aws:
+    endpoint-url: ${AWS_ENDPOINT_URL:http://localhost:9000}
+    s3-bucket: ${AWS_S3_BUCKET:sadrm-local}
+    access-key: ${AWS_ACCESS_KEY_ID:minioadmin}
+    secret-key: ${AWS_SECRET_ACCESS_KEY:minioadmin}
+
+logging:
+  level:
+    com.sadrm: DEBUG
+    org.springframework.security: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE

@@ -1,0 +1,75 @@
+# ─── Secrets & Environment ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+secrets/
+
+# ─── Maven Build Output ────────────────────────────────────────────────────────
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ─── Java ─────────────────────────────────────────────────────────────────────
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+
+# ─── IntelliJ IDEA ────────────────────────────────────────────────────────────
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/dictionaries/
+.idea/shelf/
+.idea/aws.xml
+.idea/httpRequests/
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.classpath
+.idea/uiDesigner.xml
+.idea/*.iml
+*.iml
+*.ipr
+*.iws
+
+# ─── Eclipse ──────────────────────────────────────────────────────────────────
+.classpath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# ─── VS Code ──────────────────────────────────────────────────────────────────
+.vscode/
+
+# ─── Claude Code ──────────────────────────────────────────────────────────────
+.claude/settings.local.json
+
+# ─── Patch Files ──────────────────────────────────────────────────────────────
+*.patch
+*.orig
+
+# ─── Log Files ────────────────────────────────────────────────────────────────
+*.log
+logs/
+logs.txt
+spring.log
+
+# ─── OS Generated ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ─── Postman (optional — remove if you want to share collections) ─────────────
+*.postman_collection.json
+*.postman_environment.json

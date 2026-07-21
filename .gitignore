@@ -1,0 +1,42 @@
+# ─── Secrets & Environment ────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+secrets/
+
+# ─── Node / Frontend ──────────────────────────────────────────────────────────
+node_modules/
+dist/
+dist-ssr/
+build/
+*.local
+
+# ─── Java / Backend (Maven) ───────────────────────────────────────────────────
+target/
+*.class
+*.jar
+*.war
+
+# ─── Logs ─────────────────────────────────────────────────────────────────────
+*.log
+logs/
+logs.txt
+
+# ─── Editor / IDE ─────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.iml
+*.swp
+
+# ─── Claude Code ──────────────────────────────────────────────────────────────
+.claude/settings.local.json
+
+# ─── OS Generated ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/

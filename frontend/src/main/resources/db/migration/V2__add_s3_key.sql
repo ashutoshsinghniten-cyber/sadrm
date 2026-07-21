@@ -1,0 +1,1 @@
+ALTER TABLE batch_pages ADD COLUMN IF NOT EXISTS s3_key TEXT;

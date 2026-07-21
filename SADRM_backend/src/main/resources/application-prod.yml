@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: ${DATABASE_URL}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX:80}
+      minimum-idle: ${DB_POOL_MIN_IDLE:20}
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      url: ${REDIS_URL}
+
+server:
+  tomcat:
+    # 200 threads : 80 Hikari connections = 2.5× ratio.
+    # Non-DB requests (static assets, health checks, SSE keepalives) consume threads
+    # without touching the pool, so the headroom is intentional.
+    threads:
+      max: ${TOMCAT_MAX_THREADS:200}
+      min-spare: ${TOMCAT_MIN_SPARE_THREADS:25}
+    accept-count: ${TOMCAT_ACCEPT_COUNT:150}
+
+logging:
+  level:
+    com.sadrm: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
