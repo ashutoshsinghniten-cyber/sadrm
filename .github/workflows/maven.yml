@@ -1,4 +1,3 @@
-
 name: Java CI with Maven
 
 on:
@@ -8,7 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
+  maven-build:           # <-- yahan 'build' ki jagah 'maven-build'
     runs-on: ubuntu-latest
 
     steps:
