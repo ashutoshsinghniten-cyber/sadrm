@@ -1,7 +1,9 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -15,6 +17,7 @@
     <artifactId>sadrm-backend</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
+
     <name>SADRM Backend</name>
     <description>Salvation Army Donation Records Management - Java Backend</description>
 
@@ -22,8 +25,10 @@
         <java.version>17</java.version>
         <jjwt.version>0.12.6</jjwt.version>
         <awssdk.version>2.27.0</awssdk.version>
+        <jacoco.version>0.8.13</jacoco.version>
     </properties>
 
+    <!-- AWS SDK Dependency Management -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -36,6 +41,7 @@
         </dependencies>
     </dependencyManagement>
 
+    <!-- Dependencies -->
     <dependencies>
 
         <!-- Spring Boot Web -->
@@ -74,7 +80,7 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- WebFlux - used for non-blocking HTTP client (AI proxy) -->
+        <!-- WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
@@ -105,12 +111,14 @@
             <artifactId>jjwt-api</artifactId>
             <version>${jjwt.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
@@ -118,70 +126,65 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- AWS SDK v2 - S3 -->
+        <!-- AWS SDK S3 -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3</artifactId>
         </dependency>
 
-        <!-- AWS SDK v2 - S3 Transfer Manager (multipart uploads) -->
+        <!-- AWS SDK S3 Transfer Manager -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3-transfer-manager</artifactId>
         </dependency>
 
-        <!-- AWS SDK v2 - STS (IAM role support) -->
+        <!-- AWS SDK STS -->
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sts</artifactId>
         </dependency>
 
-        <!-- PDF rendering for PDF to WebP previews -->
+        <!-- PDFBox -->
         <dependency>
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>3.0.3</version>
         </dependency>
 
-        <!-- WebP ImageIO encoder used by ImageIO.write(..., "webp", ...)
-        <dependency>
-            <groupId>com.luciad.imageio</groupId>
-            <artifactId>webp-imageio</artifactId>
-            <version>0.5</version>
-        </dependency> -->
-
+        <!-- WebP ImageIO -->
         <dependency>
             <groupId>org.sejda.imageio</groupId>
             <artifactId>webp-imageio</artifactId>
             <version>0.1.6</version>
         </dependency>
 
-        <!-- Jackson Databind (JSONB handling) -->
+        <!-- Jackson Databind -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Dotenv — auto-loads .env file into Spring environment -->
+        <!-- Spring Dotenv -->
         <dependency>
             <groupId>me.paulschwarz</groupId>
             <artifactId>spring-dotenv</artifactId>
             <version>4.0.0</version>
         </dependency>
 
-        <!-- Swagger / OpenAPI UI (springdoc 2.x for Spring Boot 3) -->
+        <!-- Swagger / OpenAPI -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.6.0</version>
         </dependency>
 
-        <!-- Test -->
+        <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -190,12 +193,58 @@
 
     </dependencies>
 
+    <!-- Build Plugins -->
     <build>
         <plugins>
+
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <!-- Spotless: Java Code Formatting -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>2.44.1</version>
+
+                <configuration>
+                    <ratchetFrom>origin/main</ratchetFrom>
+
+                    <java>
+                        <palantirJavaFormat/>
+                        <removeUnusedImports/>
+                        <importOrder/>
+                        <trimTrailingWhitespace/>
+                        <endWithNewline/>
+                    </java>
+                </configuration>
+            </plugin>
+
+            <!-- JaCoCo: Test Coverage -->
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
